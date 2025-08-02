@@ -1,17 +1,15 @@
-# Caching time for heads. The time must be specified in seconds
-# Note: I recommend using a value from 1800 (30 minutes) to 10800 (3 hours).
-cache-time: 1800
 # The site that will be used to get the players' heads. Heads must be 8 pixels.
 # Sites I recommend: mc-heads.net, crafthead.net, minotar.net, visage.surgeplay.com
 heads-provider: 'https://mc-heads.net/avatar/%s/8'
 
-# Configure a resource pack
 resource-pack:
   # Should the plugin suggest to load the resource pack when the player joins the server?
   enabled: true
 
   # URL where the resource pack can be downloaded
-  url: https://www.dropbox.com/s/uc2epfgztrw8mvz/HeadsAnywhere.zip?dl=1
+  url: https://download.mc-packs.net/pack/dfb7102221ec6e923bf2e0d488bfa71a26186180.zip
+  # SHA-1 hash
+  hash: dfb7102221ec6e923bf2e0d488bfa71a26186180
 
   # Should the plugin sent messages?
   messaging: false
