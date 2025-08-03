@@ -16,7 +16,15 @@ public class HeadsAnywhere extends JavaPlugin implements Listener {
 
    public void onEnable() {
       this.saveDefaultConfig();
-      this.headsManager = new HeadsManager(this.getConfig().getString("heads-provider"));
+
+      // Obtener configuración de overlay
+      boolean enableSkinOverlay = this.getConfig().getBoolean("enable-skin-overlay", true);
+
+      this.headsManager = new HeadsManager(
+              this.getConfig().getString("heads-provider"),
+              enableSkinOverlay
+      );
+
       ConfigurationSection resourcePack = this.getConfig().getConfigurationSection("resource-pack");
       if (resourcePack.getBoolean("enabled")) {
          Bukkit.getPluginManager().registerEvents(new ResourcePackListener(resourcePack), this);
