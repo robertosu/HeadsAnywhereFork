@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 public class HeadsManager {
     private static final Rectangle HEAD_RECT = new Rectangle(8, 8, 8, 8);
     private static final Rectangle HELMET_RECT = new Rectangle(40, 8, 8, 8);
-    private static final char[] chars = new char[]{'\u03e7', '\u03e8', '\u03e9', '\u03ea', '\u03eb', '\u03ec', '\u03ed', '\u03ee'};
+    private static final char[] chars = new char[]{'ϧ', 'Ϩ', 'ϩ', 'Ϫ', 'ϫ', 'Ϭ', 'ϭ', 'Ϯ'};
     private final String headsProvider;
     private final Cache<String, URL> skinCache;
     private final Cache<String, Component> componentCache;
