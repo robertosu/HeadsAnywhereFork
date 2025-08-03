@@ -33,38 +33,29 @@ public class SkinsRestorerHook implements PluginMessageListener {
       }
    }
 
+   @Override
    public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, @NotNull byte[] message) {
       if (channel.equals("sr:messagechannel")) {
          try {
             DataInputStream input = new DataInputStream(new ByteArrayInputStream(message));
 
-            label34: {
-               try {
-                  if (!input.readUTF().equals("SkinUpdateV2")) {
-                     break label34;
-                  }
+            // Leer el identificador UNA SOLA VEZ
+            String messageType = input.readUTF();
+            System.out.println("Received message type: " + messageType); // Debug
 
-                  String base64 = input.readUTF();
-                  URL skinURL = URI.create(PropertyUtils.getSkinTextureUrl(base64)).toURL();
-                  this.headsManager.updateCache(player.getName(), skinURL);
-               } catch (Throwable var8) {
-                  try {
-                     input.close();
-                  } catch (Throwable var7) {
-                     var8.addSuppressed(var7);
-                  }
-
-                  throw var8;
-               }
-
-               input.close();
-               return;
+            if (messageType.equals("SkinUpdateV2") || messageType.equals("skinUpdateV3")) {
+               String base64 = input.readUTF();
+               System.out.println("Processing " + messageType + " for: " + player.getName()); // Debug
+               URL skinURL = URI.create(PropertyUtils.getSkinTextureUrl(base64)).toURL();
+               this.headsManager.updateCache(player.getName(), skinURL);
+            } else {
+               System.out.println("Unknown message type: " + messageType); // Debug
             }
 
             input.close();
-         } catch (IOException var9) {
-            this.plugin.getLogger().severe("Failed to process plugin message: " + var9.getMessage());
-            throw new RuntimeException(var9);
+         } catch (IOException e) {
+            this.plugin.getLogger().severe("Failed to process plugin message: " + e.getMessage());
+            e.printStackTrace();
          }
       }
    }
